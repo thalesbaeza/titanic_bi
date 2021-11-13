@@ -44,11 +44,11 @@ def encontar_pessoas(pessoas):
         if str(soup.findAll('strong')).find('Age') > 0:
             idade = str(soup.findAll('a'))
             if idade[idade.find('/titanic-ages/'):idade.find('/titanic-ages/')+21].replace("/titanic-ages/","").replace(".html","").strip() == '':
-                idade = '-1'
+                idade = -1
             else:
                 idade = idade[idade.find('/titanic-ages/'):idade.find('/titanic-ages/')+21].replace("/titanic-ages/","").replace(".html","").replace('"',"").strip()
         else:
-            idade = ''
+            idade = -999
 
 
         #NOME DA FAMILIA
@@ -195,7 +195,7 @@ def encontar_pessoas(pessoas):
             corposnaoencontrando= 'Body Recovered'
 
 
-        conectar.criar('''CREATE TABLE IF NOT EXISTS titanic_people (Name  TEXT, Family TEXT, Age TEXT, Gender TEXT, Nationality TEXT, Embarked TEXT, Disembarked TEXT, Class TEXT, Marital_Status TEXT, Rescued TEXT, Boat TEXT, Occupation TEXT, Body TEXT, Link TEXT) ''')
+        conectar.criar('''CREATE TABLE IF NOT EXISTS titanic_people (Name  TEXT, Family TEXT, Age INT, Gender TEXT, Nationality TEXT, Embarked TEXT, Disembarked TEXT, Class TEXT, Marital_Status TEXT, Rescued TEXT, Boat TEXT, Occupation TEXT, Body TEXT, Link TEXT) ''')
 
         dataset = [nomecompleto, nomefamilia, idade, genero, nacionalidade, embarque, desembarque, classocial, parceiro, resgate, bot, ocupacao, corposnaoencontrando, link]
 
